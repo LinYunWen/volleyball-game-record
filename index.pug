@@ -1,0 +1,27 @@
+doctype html
+html(lang='zh')
+    head
+        title 排球比賽紀錄
+    body
+        section(id='settig')
+            select(id='our-name')
+                option(value='original-team') 成大資工一般隊
+                option(value='team-a') 成大資工Ａ隊
+                option(value='team-b') 成大資工Ｂ隊
+            input(
+                type='text'
+                name='enemy-team'
+                preholder='對手隊名'
+            )
+            - var n = 0;
+            while n < 6
+                input(
+                    type='text'
+                    name=n
+                    preholder=n
+                )
+
+        h1 成大資工 vs ??
+        section(id='history')
+
+        section(id='select-scetion')
