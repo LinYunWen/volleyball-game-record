@@ -2,27 +2,47 @@ doctype html
 html(lang='zh')
     head
         title 排球比賽紀錄
+        link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css")
+        link(rel="stylesheet", href="css/style.css")
+        script(src="https://cdn.jsdelivr.net/npm/vue")
     body
-        section(id='settig')
-            select(id='our-name')
-                option(value='original-team') 成大資工一般隊
-                option(value='team-a') 成大資工Ａ隊
-                option(value='team-b') 成大資工Ｂ隊
-            input(
-                type='text'
-                name='enemy-team'
-                preholder='對手隊名'
-            )
-            - var n = 0;
-            while n < 6
-                input(
-                    type='text'
-                    name=n
-                    preholder=n
-                )
-                - n++;
+        section(id='setting')
+            div(class="container")
+                div(class="row")
+                    div(class="col-md-6 col-xs-12")
+                        select(id='our-name')
+                            option(value='original-team') 成大資工一般隊
+                            option(value='team-a') 成大資工Ａ隊
+                            option(value='team-b') 成大資工Ｂ隊
+                    div(class="col-md-6 col-xs-12")
+                        input(
+                            type='text'
+                            id="enemy-name"
+                            name='enemy-team'
+                            placeholder='對手隊名'
+                        )
+                div(class="row")
+                    div(class="col-md-6 col-xs-12")
+                        input(
+                            type="text"
+                            name="liberal"
+                            placeholder="自由球員"
+                        )
+                    div(class="col-md-6 col-xs-12")
+                        - var n = 0;
+                        while n < 6
+                            input(
+                                type='text'
+                                name=n
+                                placeholder=n+1
+                            )
+                            if n==2
+                                br
+                            - n++;
+                        
 
-        h1 成大資工 vs ??
+        h1(id="title")
         section(id='history')
 
-        section(id='select-scetion')
+        section(id='select-section')
+        script(src="js/record.js")
