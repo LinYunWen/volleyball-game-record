@@ -39,10 +39,31 @@ html(lang='zh')
                             if n==2
                                 br
                             - n++;
-                        
+                div.row
+                    div.col-md-11.col-sm-11
+                    div.col-md-1.col-sm-1
+                        // button(v-on:click="clickNext") Next
+                        button#nextButton Next
+
 
         h1(id="title")
         section(id='history')
 
         section(id='select-section')
+            div.container
+                div.row
+                    div.col-md-6.col-sm-6
+                        p 得分
+                            input#get-score(type="checkbox")
+                    div.col-md-6.col-sm-6
+                        p 失分
+                            input#lose-score(type="checkbox")
+                div.row#buttons
+                    div.col-md-10.col-sm-10
+                    div.col-md-1.col-sm-1
+                        button 歷史紀錄
+                    div.col-md-1.col-sm-1
+                        button 寫入
         script(src="js/record.js")
+
+        div#app {{ message }}

@@ -34,11 +34,43 @@
             <input type="text" name="5" placeholder="6">
           </div>
         </div>
+        <div class="row">
+          <div class="col-md-11 col-sm-11"></div>
+          <div class="col-md-1 col-sm-1">
+            <!-- button(v-on:click="clickNext") Next-->
+            <button id="nextButton">Next</button>
+          </div>
+        </div>
       </div>
     </section>
     <h1 id="title"></h1>
     <section id="history"></section>
-    <section id="select-section"></section>
+    <section id="select-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-sm-6">
+            <p>得分
+              <input id="get-score" type="checkbox">
+            </p>
+          </div>
+          <div class="col-md-6 col-sm-6">
+            <p>失分
+              <input id="lose-score" type="checkbox">
+            </p>
+          </div>
+        </div>
+        <div class="row" id="buttons">
+          <div class="col-md-10 col-sm-10"></div>
+          <div class="col-md-1 col-sm-1">
+            <button>歷史紀錄</button>
+          </div>
+          <div class="col-md-1 col-sm-1">
+            <button>寫入</button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div id="app">{{ message }}</div>
     <script src="js/record.js"></script>
   </body>
 </html>
