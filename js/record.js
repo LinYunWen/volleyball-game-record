@@ -1,25 +1,56 @@
 var setting = new Vue({
     el: '#setting',
     data: {
-        seen: true
-    }
-})
-
-var clickEvent = new Vue({
-    el: '#nextButton',
-    data: {
-        name: 'vue'
+        seen: true,
+        message:　'123',
+        buttonValue: 'Next',
+        enemyTeam: '',
+        ourTeam: '選擇隊伍'
     },
-    method: {
-        nextButton: function (event) {
-            setting.seen = false
+    methods: {
+        nextSection: function (event) {
+            setting.seen = false;
+            selectSection.seen = true;
         }
     }
 })
 
-var app = new Vue({
-    el: '#app',
+var history = new Vue({
+    el: '#history',
     data: {
-        message: 'Hello'
+        seen: true
+    },
+    methods: {
+
     }
 })
+
+var selectSection = new Vue({
+    el: '#select-section',
+    data: {
+        seen: true
+    },
+    methods: {
+        showHistory: function(event) {
+            history.seen = true;
+        },
+        record: function(event) {
+            status = checkStatus();
+            if (status == 'get-score') {
+
+            } else if (status == 'loss-score') {
+
+            }
+        }
+    }
+})
+
+var status = null;
+var getScore = document.getElementById('get-score');
+var lossScore = document.getElementById('loss-score');
+function checkStatus() {
+    if (getScore.checked) {
+        return 'get-score'
+    }
+    return 'loss-score'
+}

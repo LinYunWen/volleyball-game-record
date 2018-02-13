@@ -8,17 +8,18 @@
   </head>
   <body>
     <section id="setting">
-      <div class="container">
+      <div class="container" v-if="seen">
         <div class="row">
           <div class="col-md-6 col-xs-12">
-            <select id="our-name">
-              <option value="original-team">成大資工一般隊</option>
-              <option value="team-a">成大資工Ａ隊</option>
-              <option value="team-b">成大資工Ｂ隊</option>
+            <select id="our-name" v-model="ourTeam">
+              <option value="選擇隊伍" selected="selected">選擇隊伍</option>
+              <option value="成大資工一般隊">成大資工一般隊</option>
+              <option value="成大資工Ａ隊">成大資工Ａ隊</option>
+              <option value="成大資工Ｂ隊">成大資工Ｂ隊</option>
             </select>
           </div>
           <div class="col-md-6 col-xs-12">
-            <input type="text" id="enemy-name" name="enemy-team" placeholder="對手隊名">
+            <input type="text" id="enemy-name" name="enemy-team" placeholder="對手隊名" v-model="enemyTeam">
           </div>
         </div>
         <div class="row">
@@ -26,51 +27,76 @@
             <input type="text" name="liberal" placeholder="自由球員">
           </div>
           <div class="col-md-6 col-xs-12">
-            <input type="text" name="0" placeholder="1">
-            <input type="text" name="1" placeholder="2">
-            <input type="text" name="2" placeholder="3"><br>
-            <input type="text" name="3" placeholder="4">
-            <input type="text" name="4" placeholder="5">
-            <input type="text" name="5" placeholder="6">
+            <input type="text" name="1" placeholder="1">
+            <input type="text" name="2" placeholder="2">
+            <input type="text" name="3" placeholder="3"><br>
+            <input type="text" name="4" placeholder="4">
+            <input type="text" name="5" placeholder="5">
+            <input type="text" name="6" placeholder="6">
           </div>
         </div>
         <div class="row">
           <div class="col-md-11 col-sm-11"></div>
           <div class="col-md-1 col-sm-1">
-            <!-- button(v-on:click="clickNext") Next-->
-            <button id="nextButton">Next</button>
+            <button id="nextButton" v-on:click="nextSection">{{ buttonValue }}</button>
           </div>
         </div>
       </div>
     </section>
-    <h1 id="title"></h1>
-    <section id="history"></section>
+    <section id="history">
+      <div class="container" v-if="seen">
+        <div class="row"></div>
+      </div>
+    </section>
     <section id="select-section">
-      <div class="container">
+      <div class="container" v-if="seen">
+        <div class="row">
+          <div class="col-md-12">
+            <h1 id="title"> <span>{{setting.enemyTeam}}</span><span>&nbsp;v.s. {{setting.ourTeam}}</span></h1>
+          </div>
+        </div>
         <div class="row">
           <div class="col-md-6 col-sm-6">
-            <p>得分
+            <p> 
+              <label for="get-score">得分</label>
               <input id="get-score" type="checkbox">
+              <select id="get-score-reason">
+                <option value="default" selected="selected">選擇</option>
+                <option value="enemy-error">對方失誤</option>
+                <option value="attack-get">攻擊得分</option>
+                <option value="tip-get">吊球得分</option>
+                <option value="ace">發球得分</option>
+                <option value="block-get">攔網得分</option>
+              </select>
             </p>
           </div>
           <div class="col-md-6 col-sm-6">
-            <p>失分
-              <input id="lose-score" type="checkbox">
+            <p> 
+              <label for="loss-score">失分</label>
+              <input id="loss-score" type="checkbox">
+              <select id="loss-score-reason">
+                <option value="default" selected="selected">選擇</option>
+                <option value="attack-loss">攻擊失誤</option>
+                <option value="serve-loss">發球失誤</option>
+                <option value="pass-loss">接球失誤</option>
+                <option value="block-loss">攔網失誤</option>
+                <option value="set-loss">舉球失誤</option>
+                <option value="error">犯規失誤</option>
+              </select>
             </p>
           </div>
         </div>
         <div class="row" id="buttons">
           <div class="col-md-10 col-sm-10"></div>
           <div class="col-md-1 col-sm-1">
-            <button>歷史紀錄</button>
+            <button v-on:click="showHistory">歷史紀錄</button>
           </div>
           <div class="col-md-1 col-sm-1">
-            <button>寫入</button>
+            <button v-on:click="record">寫入</button>
           </div>
         </div>
       </div>
     </section>
-    <div id="app">{{ message }}</div>
     <script src="js/record.js"></script>
   </body>
 </html>
