@@ -51,7 +51,17 @@ html(lang="zh")
         section(id="history")
             div.container(v-if="seen")
                 div.row
-                    
+                    div.col-md-2
+                    div.col-md-1 號碼
+                    div.col-md-3 人名
+                    div.col-md-2 狀態
+                    div.col-md-4 原因
+                div.row(v-for="record in records")
+                    div.col-md-2 
+                    div.col-md-1 {{record.num}}
+                    div.col-md-3 {{record.person}}
+                    div.col-md-2 {{record.status}}
+                    div.col-md-4 {{record.reason}}
         section(id="select-section")
             div.container(v-if="seen")
                 div.row
@@ -61,38 +71,34 @@ html(lang="zh")
                             span &nbsp;v.s. {{setting.ourTeam}}
                 div.row
                     div.col-md-12
-                        select#person(name="person")
+                        select#person(v-model="selectPerson")
                             option(value="default") 選擇人員
                             option(v-for="option in setting.teamMembers" v-bind:value="option.text") {{option.text}} {{memberNum[option.text]}}
                 div.row
                     div.col-md-6.col-sm-6
                         p 
                             label(for="get-score") 得分
-                            input#get-score(type="radio" name="score-type")
-                            select#get-score-reason
-                                option(value="default" selected="selected") 選擇
-                                option(value="enemy-error") 對方失誤
-                                option(value="attack-get") 攻擊得分
-                                option(value="tip-get") 吊球得分
-                                option(value="ace") 發球得分
-                                option(value="block-get") 攔網得分
+                            input#get-score(type="radio" name="score-type", value="get-score" v-model="picked")
+                            select#get-score-reason(v-model="selectGetScore")
+                                option(v-for="option in getScoreArray" v-bind:value="option.value") {{option.text}}
                     div.col-md-6.col-sm-6
-                        p 
+                        p
                             label(for="loss-score") 失分
-                            input#loss-score(type="radio" name="score-type")
-                            select#loss-score-reason
-                                option(value="default" selected="selected") 選擇
-                                option(value="attack-loss") 攻擊失誤
-                                option(value="serve-loss") 發球失誤
-                                option(value="pass-loss") 接球失誤
-                                option(value="block-loss") 攔網失誤
-                                option(value="set-loss") 舉球失誤
-                                option(value="error") 犯規失誤
+                            input#loss-score(type="radio" name="score-type", value="loss-score" v-model="picked")
+                            select#loss-score-reason(v-model="selectLossScore")
+                                option(v-for="option in lossScoreArray" v-bind:value="option.value") {{option.text}}
+                        span {{selectGetScore}}
+                        br
+                        span {{selectLossScore}}
+                        br
+                        span {{selectPerson}}
+                        br
+                        span {{picked}}
                 div.row#buttons
                     div.col-md-10.col-sm-10
                     div.col-md-1.col-sm-1
-                        button(v-on:click="showHistory") 歷史紀錄
+                        button(v-on:click="clickHistory") {{historyButton}}
                     div.col-md-1.col-sm-1
-                        button(v-on:click="record") 寫入
-        script(src="js/member.js")
+                        button(v-on:click="clickRecord") 寫入
+        script(src="js/util.js")
         script(src="js/record.js")

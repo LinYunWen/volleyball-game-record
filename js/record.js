@@ -24,10 +24,13 @@ var setting = new Vue({
     }
 })
 
-var history = new Vue({
+var historySection = new Vue({
     el: '#history',
     data: {
-        seen: true
+        seen: true,
+        records: [
+            {text: "123"}
+        ]
     },
     methods: {
 
@@ -37,29 +40,60 @@ var history = new Vue({
 var selectSection = new Vue({
     el: '#select-section',
     data: {
-        seen: true
+        seen: true,
+        picked: '',
+        selectPerson: 'default',
+        selectGetScore: 'default',
+        selectLossScore: 'default',
+        historyButton: '顯示歷史紀錄',
     },
     methods: {
-        showHistory: function(event) {
-            history.seen = true;
+        clickHistory: function(event) {
+            historyButton = historySection.seen ? "顯示歷史紀錄" : "隱藏歷史紀錄";
+            historySection.seen = !historySection.seen;
         },
-        record: function(event) {
-            status = checkStatus();
-            if (status == 'get-score') {
+        clickRecord: function(event) {
+            var status = selectSection.picked;
+            var tempNum, tempPerson, tempReason;
 
-            } else if (status == 'loss-score') {
-
+            for (var i = 0; i < setting.teamMembers.length; i++) {
+                var temp = setting.teamMembers[i].text;
+                if (selectSection.selectPerson == temp) {
+                    tempNum = temp;
+                    tempPerson = memberNum[temp];
+                    break;
+                }
             }
+
+            if (status == 'get-score') {
+                for (var i = 0; i < setting.teamMembers.length; i++) {
+                    if (selectSection.selectGetScore == getScoreArray[i].value) {
+                        tempReason = getScoreArray[i].text;
+                        break;
+                    }
+                }
+            } else if (status == 'loss-score') {
+                for (var i = 0; i < setting.teamMembers.length; i++) {
+                    if (selectSection.selectLossScore == lossScoreArray[i].value) {
+                        tempReason = lossScoreArray[i].text;
+                        break;
+                    }
+                }
+            }
+            historySection.records.push({
+                num: tempNum,
+                person: tempPerson,
+                status: status,
+                reason: tempReason
+            });
+
+            reset();
         }
     }
 })
 
-var status = null;
-var getScore = document.getElementById('get-score');
-var lossScore = document.getElementById('loss-score');
-function checkStatus() {
-    if (getScore.checked) {
-        return 'get-score'
-    }
-    return 'loss-score'
+function reset() {
+    selectSection.selectPerson = 'default';
+    selectSection.selectGetScore = 'default';
+    selectSection.selectLossScore = 'default';
 }

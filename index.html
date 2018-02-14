@@ -45,7 +45,20 @@
     </section>
     <section id="history">
       <div class="container" v-if="seen">
-        <div class="row"></div>
+        <div class="row">
+          <div class="col-md-2"></div>
+          <div class="col-md-1">號碼</div>
+          <div class="col-md-3">人名</div>
+          <div class="col-md-2">狀態</div>
+          <div class="col-md-4">原因</div>
+        </div>
+        <div class="row" v-for="record in records">
+          <div class="col-md-2"> </div>
+          <div class="col-md-1">{{record.num}}</div>
+          <div class="col-md-3">{{record.person}}</div>
+          <div class="col-md-2">{{record.status}}</div>
+          <div class="col-md-4">{{record.reason}}</div>
+        </div>
       </div>
     </section>
     <section id="select-section">
@@ -57,7 +70,7 @@
         </div>
         <div class="row">
           <div class="col-md-12">
-            <select id="person" name="person">
+            <select id="person" v-model="selectPerson">
               <option value="default">選擇人員</option>
               <option v-for="option in setting.teamMembers" v-bind:value="option.text">{{option.text}} {{memberNum[option.text]}}</option>
             </select>
@@ -67,44 +80,34 @@
           <div class="col-md-6 col-sm-6">
             <p> 
               <label for="get-score">得分</label>
-              <input id="get-score" type="radio" name="score-type">
-              <select id="get-score-reason">
-                <option value="default" selected="selected">選擇</option>
-                <option value="enemy-error">對方失誤</option>
-                <option value="attack-get">攻擊得分</option>
-                <option value="tip-get">吊球得分</option>
-                <option value="ace">發球得分</option>
-                <option value="block-get">攔網得分</option>
+              <input id="get-score" type="radio" name="score-type" value="get-score" v-model="picked">
+              <select id="get-score-reason" v-model="selectGetScore">
+                <option v-for="option in getScoreArray" v-bind:value="option.value">{{option.text}}</option>
               </select>
             </p>
           </div>
           <div class="col-md-6 col-sm-6">
-            <p> 
+            <p>
               <label for="loss-score">失分</label>
-              <input id="loss-score" type="radio" name="score-type">
-              <select id="loss-score-reason">
-                <option value="default" selected="selected">選擇</option>
-                <option value="attack-loss">攻擊失誤</option>
-                <option value="serve-loss">發球失誤</option>
-                <option value="pass-loss">接球失誤</option>
-                <option value="block-loss">攔網失誤</option>
-                <option value="set-loss">舉球失誤</option>
-                <option value="error">犯規失誤</option>
+              <input id="loss-score" type="radio" name="score-type" value="loss-score" v-model="picked">
+              <select id="loss-score-reason" v-model="selectLossScore">
+                <option v-for="option in lossScoreArray" v-bind:value="option.value">{{option.text}}</option>
               </select>
-            </p>
+            </p><span>{{selectGetScore}}</span><br><span>{{selectLossScore}}</span><br><span>{{selectPerson}}</span><br><span>{{picked}}</span>
           </div>
         </div>
         <div class="row" id="buttons">
           <div class="col-md-10 col-sm-10"></div>
           <div class="col-md-1 col-sm-1">
-            <button v-on:click="showHistory">歷史紀錄</button>
+            <button v-on:click="clickHistory">{{historyButton}}</button>
           </div>
           <div class="col-md-1 col-sm-1">
-            <button v-on:click="record">寫入</button>
+            <button v-on:click="clickRecord">寫入</button>
           </div>
         </div>
       </div>
     </section>
+    <script src="js/util.js">               </script>
     <script src="js/member.js"></script>
     <script src="js/record.js"></script>
   </body>
