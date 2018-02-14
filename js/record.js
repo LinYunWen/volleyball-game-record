@@ -5,7 +5,16 @@ var setting = new Vue({
         message:　'123',
         buttonValue: 'Next',
         enemyTeam: '',
-        ourTeam: '選擇隊伍'
+        ourTeam: '選擇隊伍',
+        teamMembers: [
+            {text: ""},
+            {text: ""},
+            {text: ""},
+            {text: ""},
+            {text: ""},
+            {text: ""},
+            {text: ""},
+        ]
     },
     methods: {
         nextSection: function (event) {
