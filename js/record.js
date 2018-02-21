@@ -29,7 +29,6 @@ var historySection = new Vue({
     data: {
         seen: true,
         records: [
-            {text: "123"}
         ]
     },
     methods: {
@@ -88,7 +87,40 @@ var selectSection = new Vue({
             });
 
             reset();
+        },
+        clickFinishButton: function(event) {
+            for (var i = 0; i < historySection.records.length; i++) {
+                var record = historySection.records[i];
+                console.log('record: ', record);
+                console.log('status: ', record.status);
+                if (record.status == 'get-score') {
+                    displaySection.getScore.push(record);
+                } else {
+                    displaySection.lossScore.push(record);
+                }
+            }
+            console.log('our team: ', setting.ourTeam);
+            console.log('get score: ', displaySection.getScore.length);
+            console.log('loss score: ', displaySection.lossScore.length);
+            if (displaySection.getScore.length > displaySection.lossScore.length) {
+                displaySection.winner = setting.ourTeam;
+            } else {
+                displaySection.winner = setting.enemyTeam;
+            }
         }
+    }
+})
+
+var displaySection = new Vue({
+    el: '#display-section',
+    data: {
+        seen: true,
+        winner: '222',
+        lossScore: [],
+        getScore: []
+    },
+    methods: {
+
     }
 })
 

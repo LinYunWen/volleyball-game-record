@@ -95,10 +95,27 @@ html(lang="zh")
                         br
                         span {{picked}}
                 div.row#buttons
-                    div.col-md-10.col-sm-10
-                    div.col-md-1.col-sm-1
+                    div.col-md-9.col-sm-9
+                    div.col-md-2.col-sm-2
                         button(v-on:click="clickHistory") {{historyButton}}
                     div.col-md-1.col-sm-1
                         button(v-on:click="clickRecord") 寫入
+                div.row#finishButton
+                    div.col-md-10
+                    div.col-md-2
+                        button(@click="clickFinishButton") 比賽結束
+        section#display-section
+            h1#winner 勝利隊： {{winner}}
+            div（style="display: flex;")
+                div
+                    div.container
+                        div.row
+                            div.col-md-6
+                div
+                    div.container
+                        div.row
+                            div.col-md-6
+
+        section#analysis-scetion
         script(src="js/util.js")
         script(src="js/record.js")
