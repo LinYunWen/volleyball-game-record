@@ -94,15 +94,15 @@ var selectSection = new Vue({
                 console.log('record: ', record);
                 console.log('status: ', record.status);
                 if (record.status == 'get-score') {
-                    displaySection.getScore.push(record);
+                    displaySection.getScores.push(record);
                 } else {
-                    displaySection.lossScore.push(record);
+                    displaySection.lossScores.push(record);
                 }
             }
             console.log('our team: ', setting.ourTeam);
-            console.log('get score: ', displaySection.getScore.length);
-            console.log('loss score: ', displaySection.lossScore.length);
-            if (displaySection.getScore.length > displaySection.lossScore.length) {
+            console.log('get score: ', displaySection.getScores.length);
+            console.log('loss score: ', displaySection.lossScores.length);
+            if (displaySection.getScores.length > displaySection.lossScores.length) {
                 displaySection.winner = setting.ourTeam;
             } else {
                 displaySection.winner = setting.enemyTeam;
@@ -116,8 +116,8 @@ var displaySection = new Vue({
     data: {
         seen: true,
         winner: '222',
-        lossScore: [],
-        getScore: []
+        lossScores: [],
+        getScores: []
     },
     methods: {
 
