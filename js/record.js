@@ -7,13 +7,13 @@ var setting = new Vue({
         enemyTeam: '',
         ourTeam: '選擇隊伍',
         teamMembers: [
-            {text: ""},
-            {text: ""},
-            {text: ""},
-            {text: ""},
-            {text: ""},
-            {text: ""},
-            {text: ""},
+            {num: "", name: "", lossRecordIds: [], getRecordIds: []},
+            {num: "", name: "", lossRecordIds: [], getRecordIds: []},
+            {num: "", name: "", lossRecordIds: [], getRecordIds: []},
+            {num: "", name: "", lossRecordIds: [], getRecordIds: []},
+            {num: "", name: "", lossRecordIds: [], getRecordIds: []},
+            {num: "", name: "", lossRecordIds: [], getRecordIds: []},
+            {num: "", name: "", lossRecordIds: [], getRecordIds: []},
         ]
     },
     methods: {
@@ -28,8 +28,7 @@ var historySection = new Vue({
     el: '#history',
     data: {
         seen: true,
-        records: [
-        ]
+        records: []
     },
     methods: {
 
@@ -56,7 +55,7 @@ var selectSection = new Vue({
             var tempNum, tempPerson, tempReason;
 
             for (var i = 0; i < setting.teamMembers.length; i++) {
-                var temp = setting.teamMembers[i].text;
+                var temp = setting.teamMembers[i].num;
                 if (selectSection.selectPerson == temp) {
                     tempNum = temp;
                     tempPerson = memberNum[temp];

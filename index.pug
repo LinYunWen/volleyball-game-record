@@ -29,7 +29,7 @@ html(lang="zh")
                             type="text"
                             name="liberal"
                             placeholder="自由球員"
-                            v-model="teamMembers[6].text"
+                            v-model="teamMembers[6].num"
                         )
                     div(class="col-md-6 col-xs-12")
                         - var n = 0;
@@ -38,7 +38,7 @@ html(lang="zh")
                                 type="text"
                                 name=n+1
                                 placeholder=n+1
-                                v-model="teamMembers["+n+"].text"
+                                v-model="teamMembers["+n+"].num"
                             )
                             if n==2
                                 br
@@ -73,7 +73,7 @@ html(lang="zh")
                     div.col-md-12
                         select#person(v-model="selectPerson")
                             option(value="default") 選擇人員
-                            option(v-for="option in setting.teamMembers" v-bind:value="option.text") {{option.text}} {{memberNum[option.text]}}
+                            option(v-for="option in setting.teamMembers" v-bind:value="option.num") {{option.num}} {{memberNum[option.num]}}
                 div.row
                     div.col-md-6.col-sm-6
                         p 
@@ -106,16 +106,36 @@ html(lang="zh")
                         button(@click="clickFinishButton") 比賽結束
         section#display-section
             h1#winner 勝利隊： {{winner}}
-            div（style="display: flex;")
+            div(style="display: flex;")
                 div
                     div.container
                         div.row
-                            div.col-md-6
+                            div.col-md-12 失分
+                        div.row(v-for="record in lossScores")
+                            div.col-md-2 {{record.num}}號
+                            div.col-md-6 {{record.person}}
+                            div.col-md-4 {{record.reason}}
                 div
                     div.container
                         div.row
-                            div.col-md-6
+                            div.col-md-12 得分
+                        div.row(v-for="record in getScores")
+                            div.col-md-2 {{record.num}}號
+                            div.col-md-6 {{record.person}}
+                            div.col-md-4 {{record.reason}}
 
         section#analysis-scetion
+            div.container
+                div.row(v-for="member in setting.teamMembers")
+                    div.col-md-3 {{member.name}}
+                    div.col-md-3 {{member.getRecordIds.length}}/{{member.lossRecordIds.length}}
+                    div.col-md-3
+                        div(v-for="recordId in memeber.lossRecordIds")
+                            {{historySection.records[recordId].reason}}
+                            br
+                    div.col-md-3
+                        div(v-for="recordId in memeber.getRecordIds")
+                            {{historySection.records[recordId].reason}}
+                            br
         script(src="js/util.js")
         script(src="js/record.js")
