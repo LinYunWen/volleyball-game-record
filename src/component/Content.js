@@ -1,8 +1,7 @@
 import React from "react";
 import Container from "@material-ui/core/Container";
-import { PostCard } from "./PostCard";
-import { WarnAndErrorContent } from "./WarnAndErrorContent";
-import { LoadCard } from "./LoadCard";
+import { SettingPage } from "./SettingPage";
+import { RecordPage } from "./RecordPage";
 import "../scss/base.scss";
 
 export class Content extends React.Component {
@@ -24,27 +23,13 @@ export class Content extends React.Component {
     });
   }
 
-  genContent() {
-    let { isLoading, isError, posts } = this.props.state;
-
-    if (isLoading) {
-      return this.genLoadCards();
-    } else {
-      if (isError) return <WarnAndErrorContent type="error" />;
-      else {
-        if (posts.length === 0) {
-          return <WarnAndErrorContent type="warn" />;
-        } else {
-          return this.genPostCards(posts);
-        }
-      }
-    }
-  }
 
   render() {
     return (
       <Container className="margin-top-60" maxWidth="md">
-        {this.genContent()}
+        <SettingPage />
+        <RecordPage />
+        {/* {this.genContent()} */}
       </Container>
     );
   }
