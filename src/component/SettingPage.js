@@ -3,6 +3,7 @@ import Container from "@material-ui/core/Container";
 import TextField from "@material-ui/core/TextField";
 import Divider from "@material-ui/core/Divider";
 import Button from "@material-ui/core/Button";
+import { Link } from "react-router-dom";
 import "../scss/base.scss";
 
 export class SettingPage extends React.Component {
@@ -31,7 +32,9 @@ export class SettingPage extends React.Component {
           <div className="margin-bottom-10">
             <TextField label="自由球員 1" variant="outlined" />
             <TextField label="自由球員 2" variant="outlined" />
-            <Button variant="contained" color="primary">送出</Button>
+            <Link to="/record">
+              <Button variant="contained" color="primary">送出</Button>
+            </Link>
           </div>
         </form>
       </Container>

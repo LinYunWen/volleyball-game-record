@@ -15,6 +15,7 @@ module.exports = {
   target: "web",
   devtool: "inline-source-map",
   devServer: {
+    historyApiFallback: true,
     hot: true,
     inline: true,
     port: 8081,

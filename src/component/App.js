@@ -1,7 +1,16 @@
 import React from "react";
 import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import { Content } from "./Content";
+import Container from "@material-ui/core/Container";
+import { HomePage } from "./HomePage";
+import { SettingPage } from "./SettingPage";
+import { RecordPage } from "./RecordPage";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 import "../scss/app.scss";
 
 export class App extends React.Component {
@@ -19,13 +28,25 @@ export class App extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
+      <Router>
         <CssBaseline />
         <AppBar>
           <span className="bold app-bar-title">排球比賽紀錄</span>
         </AppBar>
-        <Content state={this.state} />
-      </React.Fragment>
+        <Container className="margin-top-60" maxWidth="md">
+          <Switch>
+            <Route path="/setting">
+              <SettingPage />
+            </Route>
+            <Route path="/record">
+              <RecordPage />
+            </Route>
+            <Route path="/">
+              <HomePage />
+            </Route>
+          </Switch>
+        </Container>
+      </Router>
     );
   }
 }
