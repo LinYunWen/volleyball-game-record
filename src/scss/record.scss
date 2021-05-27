@@ -1,0 +1,17 @@
+@import "./base.scss";
+
+.score-text-paper {
+  padding: 10px;
+  margin: 10px;
+  .green {
+    color: green;
+  }
+  
+  .red {
+    color: red;
+  }
+}
+
+.score-text {
+  text-align: center;
+}
