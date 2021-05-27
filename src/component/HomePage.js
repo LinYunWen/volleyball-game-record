@@ -12,12 +12,12 @@ export class HomePage extends React.Component {
   render() {
     return (
       <Grid container spacing={3} justify="center" alignItems="center" className="height-90vh">
-        <Grid item sm={6} className="text-center">
+        <Grid item sm={3}>
           <Link to="/setting">
             <Button variant="contained" size="large" color="primary">開始新紀錄</Button>
           </Link>
         </Grid>
-        <Grid item sm={6} className="text-center">
+        <Grid item sm={3}>
           <Link to="/history">
             <Button variant="contained" size="large" color="primary">查看紀錄</Button>
           </Link>
