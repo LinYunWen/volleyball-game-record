@@ -6,7 +6,8 @@ import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
-import { Divider, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Grid } from "@material-ui/core";
+import { Divider, Grid } from "@material-ui/core";
+import { RecordDrawer } from "./RecordDrawer";
 import "../scss/record.scss";
 
 export class RecordPage extends React.Component {
@@ -143,6 +144,8 @@ export class RecordPage extends React.Component {
             </Grid>
           </Grid>
         </Grid>
+
+        <RecordDrawer />
       </Container>
     );
   }
