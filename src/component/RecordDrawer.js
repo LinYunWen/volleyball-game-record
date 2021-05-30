@@ -12,7 +12,7 @@ export class RecordDrawer extends React.Component {
     super(props);
 
     this.state = {
-      isOpen: true
+      isOpen: false
     }
 
   }

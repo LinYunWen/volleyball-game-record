@@ -15,15 +15,15 @@ export class RecordPage extends React.Component {
     super(props);
 
     this.state = {
-      scoreValue: ""
+      selectedAthlete: ""
     }
 
-    this.changeScore = this.changeScore.bind(this);
+    this.changeSelectedAthlete = this.changeSelectedAthlete.bind(this);
   }
 
-  changeScore(event) {
+  changeSelectedAthlete(event, selectedAthlete) {
     this.setState({
-      scoreValue: event.target.value
+      selectedAthlete: selectedAthlete
     });
   }
 
@@ -85,30 +85,30 @@ export class RecordPage extends React.Component {
         </Grid>
         <Divider style={{ margin: "10px 0px 20px 0" }}/>
         <Grid container item xs={12} alignItems="center" justify="center" alignContent="center">
-          <ToggleButtonGroup onChange={() => {}} exclusive>
-            <ToggleButton value="bold">
-              <Typography>123</Typography>
+          <ToggleButtonGroup value={this.state.selectedAthlete} onChange={this.changeSelectedAthlete} exclusive>
+            <ToggleButton value="1">
+              <Typography>1</Typography>
             </ToggleButton>
-            <ToggleButton value="italic">
-              <Typography>123</Typography>
+            <ToggleButton value="2">
+              <Typography>2</Typography>
             </ToggleButton>
-            <ToggleButton value="underlined">
-              <Typography>123</Typography>
+            <ToggleButton value="3">
+              <Typography>3</Typography>
             </ToggleButton>
-            <ToggleButton value="color">
-              <Typography>123</Typography>
+            <ToggleButton value="4">
+              <Typography>4</Typography>
             </ToggleButton>
-            <ToggleButton value="bold">
-              <Typography>123</Typography>
+            <ToggleButton value="5">
+              <Typography>5</Typography>
             </ToggleButton>
-            <ToggleButton value="italic">
-              <Typography>123</Typography>
+            <ToggleButton value="6">
+              <Typography>6</Typography>
             </ToggleButton>
-            <ToggleButton value="underlined">
-              <Typography>123</Typography>
+            <ToggleButton value="7">
+              <Typography>7</Typography>
             </ToggleButton>
-            <ToggleButton value="color">
-              <Typography>123</Typography>
+            <ToggleButton value="8">
+              <Typography>8</Typography>
             </ToggleButton>
           </ToggleButtonGroup>
         </Grid>
