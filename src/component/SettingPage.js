@@ -11,11 +11,27 @@ import { Typography } from "@material-ui/core";
 export class SettingPage extends React.Component {
   constructor(props) {
     super(props);
+    this.d = new Date();
   }
 
   render() {
     return (
       <Container className="margin-top-60" maxWidth="md">
+        <Grid container justify="center" alignItems="center">
+          <Grid item xs={7}>
+            <Typography variant="h5">
+              {"日期："}
+              {`${this.d.getFullYear()}/${this.d.getMonth() + 1}/${this.d.getDate()}`}
+            </Typography>
+          </Grid>
+          <Grid item xs={5}>
+            <Typography variant="h5">
+              {"時間："}
+              {`${this.d.getHours()}:${this.d.getMinutes()}`}
+            </Typography>
+          </Grid>
+        </Grid>
+        <Divider style={{ margin: "10px 0" }}/>
         <form>
           <Grid container spacing={1}>
             <Grid item xs={12}>
