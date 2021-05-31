@@ -4,7 +4,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Container from "@material-ui/core/Container";
 import { HomePage } from "./HomePage";
 import { SettingPage } from "./SettingPage";
-import { RecordPage } from "./RecordPage";
+import RecordPage from "./RecordPage";
 import {
   BrowserRouter as Router,
   Switch,

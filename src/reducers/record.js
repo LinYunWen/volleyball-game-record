@@ -1,16 +1,8 @@
-export function recordReducer(state = {}, action) {
+import { defaultState } from "../defaultState";
+
+export function recordReducer(state = defaultState.record, action) {
     switch (action.type) {
-        case "SET_MODAL": {
-            break;
-        }
-        case "SET_CONTEXT_MENU": {
-            break;
-        }
-        case "REFRESH_UI": {
-            break;
-        }
         default:
             return state;
     }
-    return newState;
 }

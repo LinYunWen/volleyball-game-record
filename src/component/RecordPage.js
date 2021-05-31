@@ -1,4 +1,6 @@
 import React from "react";
+import { connect } from 'react-redux'
+import { recordAction } from '../action'
 import Container from "@material-ui/core/Container";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import Button from "@material-ui/core/Button";
@@ -10,7 +12,7 @@ import { Divider, Grid } from "@material-ui/core";
 import { RecordDrawer } from "./RecordDrawer";
 import "../scss/record.scss";
 
-export class RecordPage extends React.Component {
+class RecordPage extends React.Component {
   constructor(props) {
     super(props);
 
@@ -150,3 +152,9 @@ export class RecordPage extends React.Component {
     );
   }
 }
+
+const mapStateToProps = store => (
+  { record: store.record }
+)
+
+export default connect(mapStateToProps, recordAction)(RecordPage);
