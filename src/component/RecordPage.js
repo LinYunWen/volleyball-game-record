@@ -16,102 +16,64 @@ class RecordPage extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      selectedAthlete: ""
-    }
+    this.scoreActions = {
+      get: ["對方失誤", "攻擊得分", "吊球得分", "發球得分", "攔網得分"],
+      lost: ["攻擊失誤", "發球失誤", "接球失誤", "攔網失誤", "舉球失誤", "犯規失誤"]
+    };
 
-    this.changeSelectedAthlete = this.changeSelectedAthlete.bind(this);
-  }
-
-  changeSelectedAthlete(event, selectedAthlete) {
-    this.setState({
-      selectedAthlete: selectedAthlete
-    });
   }
 
   genScoreAction(type) {
-    if (type === "get") {
-      return (
-        <ButtonGroup
-          orientation="vertical"
-          color="primary"
-          aria-label="vertical contained primary button group"
-          variant="contained"
-          size="large"
-          className="margin-bottom-10"
-        >
-          <Button>對方失誤</Button>
-          <Button>攻擊得分</Button>
-          <Button>吊球得分</Button>
-          <Button>發球得分</Button>
-          <Button>攔網得分</Button>
-        </ButtonGroup>
-      );
-    } else if (type === "lost") {
-      return (
-        <ButtonGroup
-          orientation="vertical"
-          color="primary"
-          aria-label="vertical contained primary button group"
-          variant="contained"
-          size="large"
-          className="margin-bottom-10"
-        >
-          <Button>攻擊失誤</Button>
-          <Button>發球失誤</Button>
-          <Button>接球失誤</Button>
-          <Button>攔網失誤</Button>
-          <Button>舉球失誤</Button>
-          <Button>犯規失誤</Button>
-        </ButtonGroup>
-      );
+    return (
+      <ButtonGroup
+        orientation="vertical"
+        color="primary"
+        aria-label="vertical contained primary button group"
+        variant="contained"
+        size="large"
+        className="margin-bottom-10"
+      >
+        {this.scoreActions[type].map((action, index) => {
+        return (
+          <Button key={index}>{action}</Button>
+        );
+      })}
+      </ButtonGroup>
+    );
+  }
 
-    } else {
-      return;
-    }
+  genToggleButtons() {
+    return (
+      this.props.record.athlete.nums.map((num, index) => {
+        let s = `${num}`;
+       return (
+        <ToggleButton key={index} value={s}>
+          <Typography>{s}</Typography>
+        </ToggleButton>
+       );
+      })
+    )
   }
 
   render() {
+    console.log(this.props)
     return (
       <Container className="margin-top-60" maxWidth="md">
         <Grid container alignItems="center" justify="center" alignContent="center">
           <Paper className="score-text-paper">
             <Typography variant="h6" color="textSecondary" className="score-text">敵方</Typography>
-            <Typography variant="h3" className="score-text green">10</Typography>
+            <Typography variant="h3" className="score-text green">{this.props.record.score.competitor}</Typography>
           </Paper>
           <Typography variant="h3" className="bold">:</Typography>
           <Paper className="score-text-paper">
             <Typography variant="h6" color="textSecondary" className="score-text">我方</Typography>
-            <Typography variant="h3" className="score-text red">10</Typography>
+            <Typography variant="h3" className="score-text red">{this.props.record.score.us}</Typography>
           </Paper>
         </Grid>
         <Divider style={{ margin: "10px 0px 20px 0" }}/>
         <Grid container item xs={12} alignItems="center" justify="center" alignContent="center">
-          <ToggleButtonGroup value={this.state.selectedAthlete} onChange={this.changeSelectedAthlete} exclusive>
-            <ToggleButton value="1">
-              <Typography>1</Typography>
-            </ToggleButton>
-            <ToggleButton value="2">
-              <Typography>2</Typography>
-            </ToggleButton>
-            <ToggleButton value="3">
-              <Typography>3</Typography>
-            </ToggleButton>
-            <ToggleButton value="4">
-              <Typography>4</Typography>
-            </ToggleButton>
-            <ToggleButton value="5">
-              <Typography>5</Typography>
-            </ToggleButton>
-            <ToggleButton value="6">
-              <Typography>6</Typography>
-            </ToggleButton>
-            <ToggleButton value="7">
-              <Typography>7</Typography>
-            </ToggleButton>
-            <ToggleButton value="8">
-              <Typography>8</Typography>
-            </ToggleButton>
+          <ToggleButtonGroup value={this.props.record.athlete.selected} onChange={this.props.changeSelectedAthlete} exclusive>
+            {this.genToggleButtons()}
           </ToggleButtonGroup>
         </Grid>
         <Grid container className="text-center">

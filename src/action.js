@@ -1,9 +1,9 @@
 
 export const recordAction = {
-    temp() {
+    changeSelectedAthlete(event, selectedAthlete) {
         return {
-            type: "TEMP"
+            type: "CHANGE_SELECTED_ATHLETE",
+            payload: selectedAthlete
         };
     },
-
 };
