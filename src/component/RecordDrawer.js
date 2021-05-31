@@ -1,4 +1,6 @@
 import React from "react";
+import { connect } from 'react-redux';
+import { recordAction } from '../action';
 import { Divider, Typography } from "@material-ui/core";
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -7,7 +9,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import "../scss/record.scss";
 
-export class RecordDrawer extends React.Component {
+class RecordDrawer extends React.Component {
   constructor(props) {
     super(props);
 
@@ -25,11 +27,10 @@ export class RecordDrawer extends React.Component {
 
 
   drawerListItem() {
-    let records = [{ isGet: true, athlete: 33, type: "攻擊得分" }, { isGet: false, athlete: 33, type: "攻擊得分" }]
     return (
       <React.Fragment>
         <List style={{ width: "50vw" }}>
-          {records.map((record, index) => {
+          {this.props.record.drawer.records.map((record, index) => {
             return (
               <React.Fragment key={index}>
                 <ListItem button className={`record${record.isGet ? " win" : " lose"}`}>
@@ -50,12 +51,18 @@ export class RecordDrawer extends React.Component {
   render() {
     return (
         <SwipeableDrawer
-          open={this.state.isOpen}
-          onClose={this.toggleDrawer(false)}
-          onOpen={this.toggleDrawer(true)}
+          open={this.props.record.drawer.isOpen}
+          onClose={(event) => { this.props.toggleRecordDrawer(false); }}
+          onOpen={(event) => { this.props.toggleRecordDrawer(true); }}
         >
           {this.drawerListItem()}
         </SwipeableDrawer>
     );
   }
 }
+
+const mapStateToProps = store => (
+  { record: store.record }
+)
+
+export default connect(mapStateToProps, recordAction)(RecordDrawer);

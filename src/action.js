@@ -6,4 +6,10 @@ export const recordAction = {
             payload: selectedAthlete
         };
     },
+    toggleRecordDrawer(bool) {
+        return {
+            type: "TOGGLE_RECORD_DRAWER",
+            payload: bool
+        };
+    }
 };

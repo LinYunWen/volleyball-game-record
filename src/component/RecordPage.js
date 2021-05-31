@@ -1,6 +1,6 @@
 import React from "react";
-import { connect } from 'react-redux'
-import { recordAction } from '../action'
+import { connect } from 'react-redux';
+import { recordAction } from '../action';
 import Container from "@material-ui/core/Container";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import Button from "@material-ui/core/Button";
@@ -9,7 +9,7 @@ import Paper from "@material-ui/core/Paper";
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import { Divider, Grid } from "@material-ui/core";
-import { RecordDrawer } from "./RecordDrawer";
+import RecordDrawer from "./RecordDrawer";
 import "../scss/record.scss";
 
 class RecordPage extends React.Component {
@@ -99,7 +99,11 @@ class RecordPage extends React.Component {
           </Grid>
           <Grid container className="margin-top-20">
             <Grid item xs={4}>
-              <Button variant="contained" color="primary">查看紀錄</Button>
+              <Button variant="contained" color="primary"
+                onClick={(event) => { this.props.toggleRecordDrawer(true); }}
+              >
+                  查看紀錄
+              </Button>
             </Grid>
             <Grid item xs={4}>
             </Grid>
