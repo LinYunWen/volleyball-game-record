@@ -1,0 +1,44 @@
+@import "./base.scss";
+
+.score-text-paper {
+  padding: 10px;
+  margin: 10px;
+  .green {
+    color: green;
+  }
+  
+  .red {
+    color: red;
+  }
+}
+
+.score-text {
+  text-align: center;
+}
+
+.record {
+  &.win {
+    .record-icon {
+      justify-content: center;
+      p {
+        background: red;
+        height: 100%;
+        border-radius: 50%;
+        padding: 15% 20%;
+      }
+    }
+  }
+  &.lose {
+    .record-icon {
+      justify-content: center;
+      p {
+        background: greenyellow;
+        height: 100%;
+        border-radius: 50%;
+        padding: 15% 20%;
+      }
+    }
+  }
+}
+
+
