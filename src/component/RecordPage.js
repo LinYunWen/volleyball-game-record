@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from 'react-redux';
 import { recordAction } from '../action';
-import Container from "@material-ui/core/Container";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
@@ -10,6 +9,7 @@ import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import { Divider, Grid } from "@material-ui/core";
 import RecordDrawer from "./RecordDrawer";
+import RecordSnackbar from "./RecordSnackbar";
 import "../scss/record.scss";
 
 class RecordPage extends React.Component {
@@ -35,7 +35,7 @@ class RecordPage extends React.Component {
       >
         {this.scoreActions[type].map((action, index) => {
         return (
-          <Button key={index}>{action}</Button>
+          <Button key={index} onClick={this.clickActionButton(action, type === "get" ? true : false)}>{action}</Button>
         );
       })}
       </ButtonGroup>
@@ -55,10 +55,16 @@ class RecordPage extends React.Component {
     )
   }
 
+  clickActionButton(reason, isGet) {
+    return (event) => {
+      this.props.showRecordSnackbar(`${this.props.record.athlete.selected} 球員 (${reason})`, isGet);
+    }
+  }
+
   render() {
     console.log(this.props)
     return (
-      <Container className="margin-top-60" maxWidth="md">
+      <React.Fragment>
         <Grid container alignItems="center" justify="center" alignContent="center">
           <Paper className="score-text-paper">
             <Typography variant="h6" color="textSecondary" className="score-text">敵方</Typography>
@@ -113,8 +119,12 @@ class RecordPage extends React.Component {
           </Grid>
         </Grid>
 
+        <RecordSnackbar isOpen={this.props.record.snackbar.isOpen}
+          message={this.props.record.snackbar.message}
+          closeSnackbar={this.props.closeRecordSnackbar}
+          isGet={this.props.record.snackbar.isGet}/>
         <RecordDrawer />
-      </Container>
+      </React.Fragment>
     );
   }
 }

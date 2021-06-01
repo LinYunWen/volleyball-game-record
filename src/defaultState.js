@@ -14,6 +14,11 @@ export const defaultState = {
                 { isGet: true, athlete: 33, type: "攻擊得分" },
                 { isGet: false, athlete: 33, type: "攻擊得分" }
             ]
+        },
+        snackbar: {
+            isOpen: false,
+            isGet: false,
+            message: ""
         }
     }
 }
