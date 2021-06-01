@@ -121,7 +121,7 @@ class RecordPage extends React.Component {
 
         <RecordSnackbar isOpen={this.props.record.snackbar.isOpen}
           message={this.props.record.snackbar.message}
-          closeSnackbar={this.props.closeRecordSnackbar}
+          closeRecordSnackbar={this.props.closeRecordSnackbar}
           isGet={this.props.record.snackbar.isGet}/>
         <RecordDrawer />
       </React.Fragment>
