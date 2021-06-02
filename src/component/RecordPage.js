@@ -44,7 +44,7 @@ class RecordPage extends React.Component {
 
   genToggleButtons() {
     return (
-      this.props.record.athlete.nums.map((num, index) => {
+      this.props.common.athlete.nums.map((num, index) => {
         let s = `${num}`;
        return (
         <ToggleButton key={index} value={s}>
@@ -57,7 +57,7 @@ class RecordPage extends React.Component {
 
   clickActionButton(reason, isGet) {
     return (event) => {
-      this.props.showRecordSnackbar(`${this.props.record.athlete.selected} 球員 (${reason})`, isGet);
+      this.props.showRecordSnackbar(`${this.props.common.athlete.selected} 球員 (${reason})`, isGet);
     }
   }
 
@@ -78,7 +78,7 @@ class RecordPage extends React.Component {
         </Grid>
         <Divider style={{ margin: "10px 0px 20px 0" }}/>
         <Grid container item xs={12} alignItems="center" justify="center" alignContent="center">
-          <ToggleButtonGroup value={this.props.record.athlete.selected} onChange={this.props.changeSelectedAthlete} exclusive>
+          <ToggleButtonGroup value={this.props.common.athlete.selected} onChange={this.props.changeSelectedAthlete} exclusive>
             {this.genToggleButtons()}
           </ToggleButtonGroup>
         </Grid>
@@ -130,7 +130,10 @@ class RecordPage extends React.Component {
 }
 
 const mapStateToProps = store => (
-  { record: store.record }
+  {
+    common: store.common,
+    record: store.record
+  }
 )
 
 export default connect(mapStateToProps, recordAction)(RecordPage);
