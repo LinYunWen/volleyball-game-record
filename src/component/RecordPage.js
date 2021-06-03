@@ -62,7 +62,6 @@ class RecordPage extends React.Component {
   }
 
   render() {
-    console.log(this.props)
     return (
       <React.Fragment>
         <Grid container alignItems="center" justify="center" alignContent="center">

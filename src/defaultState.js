@@ -6,7 +6,7 @@ export const defaultState = {
             selected: "",
             nums: [1, 2, 3, 4, 5, 6, 7, 8],
             position: {
-                normal: [1, 2, 3, 4, 5, 6],
+                normals: [1, 2, 3, 4, 5, 6],
                 liberos: []
             }
         },

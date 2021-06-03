@@ -42,7 +42,11 @@ class SettingPage extends React.Component {
     this.props.setCompetitor(this.state.competitor);
 
     // set athlete and position
-
+    let normals = [];
+    for (let key of ["1", "2", "3", "4", "5", "6"]) {
+      normals.push(this.state[key]);
+    }
+    this.props.setAthletes(normals, [this.state.libero1, this.state.libero2])
 
     // set comment
     this.props.setComment(this.state.comment);
@@ -77,30 +81,30 @@ class SettingPage extends React.Component {
             </Grid>
             <Grid container item xs={12}>
               <Grid item xs={4}>
-                <TextField required value={this.state["1"]} label="4 號位" variant="outlined"/>
+                <TextField required value={this.state["4"]} label="4 號位" variant="outlined" onChange={this.changeField("4")}/>
               </Grid>
               <Grid item xs={4}>
-                <TextField required value={this.state["2"]} label="3 號位" variant="outlined"/>
+                <TextField required value={this.state["3"]} label="3 號位" variant="outlined" onChange={this.changeField("3")}/>
               </Grid>
               <Grid item xs={4}>
-                <TextField required value={this.state["3"]} label="2 號位" variant="outlined"/>
+                <TextField required value={this.state["2"]} label="2 號位" variant="outlined" onChange={this.changeField("2")}/>
               </Grid>
               <Grid item xs={4}>
-                <TextField required value={this.state["4"]} label="5 號位" variant="outlined"/>
+                <TextField required value={this.state["5"]} label="5 號位" variant="outlined" onChange={this.changeField("5")}/>
               </Grid>
               <Grid item xs={4}>
-                <TextField required value={this.state["5"]} label="6 號位" variant="outlined"/>
+                <TextField required value={this.state["6"]} label="6 號位" variant="outlined" onChange={this.changeField("6")}/>
               </Grid>
               <Grid item xs={4}>
-                <TextField required value={this.state["6"]} label="1 號位" variant="outlined"/>
+                <TextField required value={this.state["1"]} label="1 號位" variant="outlined" onChange={this.changeField("1")}/>
               </Grid>
             </Grid>
             <Grid container item xs={12} justify="flex-end" alignItems="center">
               <Grid item xs={4}>
-                <TextField value={this.state["libero1"]} label="自由球員 1" variant="outlined"/>
+                <TextField value={this.state["libero1"]} label="自由球員 1" variant="outlined" onChange={this.changeField("libero1")}/>
               </Grid>
               <Grid item xs={4}>
-                <TextField value={this.state["libero2"]} label="自由球員 2" variant="outlined"/>
+                <TextField value={this.state["libero2"]} label="自由球員 2" variant="outlined" onChange={this.changeField("libero2")}/>
               </Grid>
             </Grid>
             <Grid item xs={12}>

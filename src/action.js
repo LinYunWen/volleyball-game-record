@@ -8,6 +8,16 @@ export const commonAction = {
                 time: time
             }
         };
+    },
+    setAthletes(normals, liberos) {
+        console.log(normals, liberos)
+        return {
+            type: "SET_ATHLETES",
+            payload: {
+                normals: normals,
+                liberos: liberos
+            }
+        };
     }
 }
 
