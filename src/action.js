@@ -1,4 +1,31 @@
 
+export const commonAction = {
+    setDateAndTime(date, time) {
+        return {
+            type: "SET_DATE_AND_TIME",
+            payload: {
+                date: date,
+                time: time
+            }
+        };
+    }
+}
+
+export const settingAction = {
+    setCompetitor(competitor) {
+        return {
+            type: "SET_COMPETITOR",
+            payload: competitor
+        };
+    },
+    setComment(comment) {
+        return {
+            type: "SET_COMMENT",
+            payload: comment
+        };
+    }
+}
+
 export const recordAction = {
     changeSelectedAthlete(event, selectedAthlete) {
         return {
