@@ -37,6 +37,15 @@ export const settingAction = {
 }
 
 export const recordAction = {
+    modifyScore(side, delta) {
+        return {
+            type: "MODIFY_SCORE",
+            payload: {
+                side: side,
+                delta: delta
+            }
+        };
+    },
     changeSelectedAthlete(event, selectedAthlete) {
         return {
             type: "CHANGE_SELECTED_ATHLETE",

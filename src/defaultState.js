@@ -18,8 +18,8 @@ export const defaultState = {
     },
     record: {
         score: {
-            competitor: 10,
-            us: 20
+            competitor: 0,
+            us: 0
         },
         drawer: {
             isOpen: false,

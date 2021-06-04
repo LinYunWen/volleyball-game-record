@@ -3,6 +3,10 @@ import { defaultState } from "../defaultState";
 export function recordReducer(state = defaultState.record, action) {
     let newState = { ...state };
     switch (action.type) {
+        case "MODIFY_SCORE": {
+            newState.score[action.payload.side] += action.payload.delta;
+            return newState;
+        }
         case "TOGGLE_RECORD_DRAWER": {
             newState.drawer.isOpen = action.payload;
             return newState;

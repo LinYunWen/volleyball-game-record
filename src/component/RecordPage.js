@@ -11,6 +11,7 @@ import { Divider, Grid } from "@material-ui/core";
 import RecordDrawer from "./RecordDrawer";
 import RecordSnackbar from "./RecordSnackbar";
 import "../scss/record.scss";
+import { isGeneratorFunction } from "regenerator-runtime";
 
 class RecordPage extends React.Component {
   constructor(props) {
@@ -57,6 +58,7 @@ class RecordPage extends React.Component {
 
   clickActionButton(reason, isGet) {
     return (event) => {
+      this.props.modifyScore(isGet ? "us" : "competitor", 1);
       this.props.showRecordSnackbar(`${this.props.common.athlete.selected} 球員 (${reason})`, isGet);
     }
   }
@@ -67,12 +69,12 @@ class RecordPage extends React.Component {
         <Grid container alignItems="center" justify="center" alignContent="center">
           <Paper className="score-text-paper">
             <Typography variant="h6" color="textSecondary" className="score-text">敵方</Typography>
-            <Typography variant="h3" className="score-text green">{this.props.record.score.competitor}</Typography>
+            <Typography variant="h3" className="score-text green">{`${this.props.record.score.competitor}`.padStart(2, "0")}</Typography>
           </Paper>
           <Typography variant="h3" className="bold">:</Typography>
           <Paper className="score-text-paper">
             <Typography variant="h6" color="textSecondary" className="score-text">我方</Typography>
-            <Typography variant="h3" className="score-text red">{this.props.record.score.us}</Typography>
+            <Typography variant="h3" className="score-text red">{`${this.props.record.score.us}`.padStart(2, "0")}</Typography>
           </Paper>
         </Grid>
         <Divider style={{ margin: "10px 0px 20px 0" }}/>
