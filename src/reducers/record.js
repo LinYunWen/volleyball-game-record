@@ -11,6 +11,14 @@ export function recordReducer(state = defaultState.record, action) {
             newState.drawer.isOpen = action.payload;
             return newState;
         }
+        case "ADD_RECORD": {
+            newState.drawer.records.push({
+                isGet: action.payload.isGet,
+                athlete: action.payload.athlete,
+                type: action.payload.reason,
+            });
+            return newState;
+        }
         case "SHOW_RECORD_SNACKBAR": {
             newState.snackbar.isOpen = true;
             newState.snackbar.isGet = action.payload.isGet;

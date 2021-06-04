@@ -46,6 +46,16 @@ export const recordAction = {
             }
         };
     },
+    addRecord(athlete, reason, isGet) {
+        return {
+            type: "ADD_RECORD",
+            payload: {
+                athlete: athlete,
+                reason: reason,
+                isGet: isGet
+            }
+        };
+    },
     changeSelectedAthlete(event, selectedAthlete) {
         return {
             type: "CHANGE_SELECTED_ATHLETE",

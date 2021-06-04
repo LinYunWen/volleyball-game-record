@@ -58,8 +58,10 @@ class RecordPage extends React.Component {
 
   clickActionButton(reason, isGet) {
     return (event) => {
+      let athlete = this.props.common.athlete.selected;
       this.props.modifyScore(isGet ? "us" : "competitor", 1);
-      this.props.showRecordSnackbar(`${this.props.common.athlete.selected} 球員 (${reason})`, isGet);
+      this.props.addRecord(athlete, reason, isGet);
+      this.props.showRecordSnackbar(`${athlete} 球員 (${reason})`, isGet);
     }
   }
 
