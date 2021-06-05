@@ -20,6 +20,10 @@ export function commonReducer(state = defaultState.common, action) {
             newState.athlete.nums = normals.concat(liberos);
             return newState;
         }
+        case "SET_ALERT_DIALOG": {
+            newState.dialog[action.payload.key] = action.payload.value;
+            return newState;
+        }
         default:
             return state;
     }

@@ -10,12 +10,20 @@ export const commonAction = {
         };
     },
     setAthletes(normals, liberos) {
-        console.log(normals, liberos)
         return {
             type: "SET_ATHLETES",
             payload: {
                 normals: normals,
                 liberos: liberos
+            }
+        };
+    },
+    setAlertDialog(key, value) {
+        return {
+            type: "SET_ALERT_DIALOG",
+            payload: {
+                key: key,
+                value: value
             }
         };
     }

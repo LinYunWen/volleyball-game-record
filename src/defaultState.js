@@ -10,6 +10,10 @@ export const defaultState = {
                 liberos: []
             }
         },
+        dialog: {
+            isOpen: false,
+            message: "確定完成此次紀錄，並送出嗎？"
+        }
 
     },
     setting: {

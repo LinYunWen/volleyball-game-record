@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from 'react-redux';
-import { recordAction } from '../action';
+import { recordAction, commonAction } from '../action';
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
@@ -10,8 +10,8 @@ import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import { Divider, Grid } from "@material-ui/core";
 import RecordDrawer from "./RecordDrawer";
 import RecordSnackbar from "./RecordSnackbar";
+import AlertDialog from "./AlertDialog";
 import "../scss/record.scss";
-import { isGeneratorFunction } from "regenerator-runtime";
 
 class RecordPage extends React.Component {
   constructor(props) {
@@ -117,11 +117,15 @@ class RecordPage extends React.Component {
             <Grid item xs={4}>
             </Grid>
             <Grid item xs={4}>
-              <Button variant="contained" color="primary">結束紀錄</Button>
+              <Button variant="contained" color="primary"
+                onClick={() => { this.props.setAlertDialog("isOpen", true); }}
+              >
+                結束紀錄
+              </Button>
             </Grid>
           </Grid>
         </Grid>
-
+        <AlertDialog />
         <RecordSnackbar isOpen={this.props.record.snackbar.isOpen}
           message={this.props.record.snackbar.message}
           closeRecordSnackbar={this.props.closeRecordSnackbar}
@@ -139,4 +143,4 @@ const mapStateToProps = store => (
   }
 )
 
-export default connect(mapStateToProps, recordAction)(RecordPage);
+export default connect(mapStateToProps, { ...recordAction, ...commonAction })(RecordPage);
