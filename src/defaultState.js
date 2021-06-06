@@ -1,12 +1,29 @@
 export const defaultState = {
-    record: {
-        score: {
-            competitor: 10,
-            us: 20
-        },
+    common: {
+        date: "",
+        time: "",
         athlete: {
             selected: "",
-            nums: [1, 2, 3, 4, 5, 6, 7, 8]
+            nums: [1, 2, 3, 4, 5, 6, 7, 8],
+            position: {
+                normals: [1, 2, 3, 4, 5, 6],
+                liberos: []
+            }
+        },
+        dialog: {
+            isOpen: false,
+            message: "確定完成此次紀錄，並送出嗎？"
+        }
+
+    },
+    setting: {
+        competitor: "",
+        comment: ""
+    },
+    record: {
+        score: {
+            competitor: 0,
+            us: 0
         },
         drawer: {
             isOpen: false,
