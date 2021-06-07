@@ -16,6 +16,7 @@ class SettingPage extends React.Component {
     this.d = new Date();
     this.setDateAndTime();
     this.state = {
+      cup: "",
       competitor: "",
       "1": "", "2": "", "3": "", "4": "", "5": "", "6": "",
       "libero1": "", "libero2": "",
@@ -38,7 +39,8 @@ class SettingPage extends React.Component {
   }
 
   setSettingInfo() {
-    // set competitor
+    // set competitor and cup
+    this.props.setCup(this.state.cup);
     this.props.setCompetitor(this.state.competitor);
 
     // set athlete and position
@@ -70,8 +72,11 @@ class SettingPage extends React.Component {
         <Divider style={{ margin: "10px 0" }}/>
         <form>
           <Grid container spacing={1}>
-            <Grid item xs={12}>
-              <TextField value={this.state.competitor} required label="請輸入對手隊名" variant="outlined" onChange={this.changeField("competitor")}/>
+            <Grid item xs={6}>
+              <TextField value={this.state.cup} label="盃賽名稱" variant="outlined" onChange={this.changeField("cup")}/>
+            </Grid>
+            <Grid item xs={6}>
+              <TextField value={this.state.competitor} required label="對手隊名" variant="outlined" onChange={this.changeField("competitor")}/>
             </Grid>
             <Grid item xs={12}>
               <Divider style={{ margin: "10px 0" }}/>

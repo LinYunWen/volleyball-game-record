@@ -30,6 +30,12 @@ export const commonAction = {
 }
 
 export const settingAction = {
+    setCup(cup) {
+        return {
+            type: "SET_CUP",
+            payload: cup
+        };
+    },
     setCompetitor(competitor) {
         return {
             type: "SET_COMPETITOR",

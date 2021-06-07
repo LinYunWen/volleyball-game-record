@@ -17,6 +17,7 @@ export const defaultState = {
 
     },
     setting: {
+        cup: "",
         competitor: "",
         comment: ""
     },
