@@ -16,19 +16,83 @@ class SettingPage extends React.Component {
     this.d = new Date();
     this.setDateAndTime();
     this.state = {
-      cup: "",
-      competitor: "",
-      "1": "", "2": "", "3": "", "4": "", "5": "", "6": "",
-      "libero1": "", "libero2": "",
-      comment: ""
+      cup: {
+        text: "",
+        isError: false,
+        helperText: ""
+      },
+      competitor: {
+        text: "",
+        isRequired: true,
+        isError: false,
+        helperText: ""
+      },
+      "1": {
+        text: "",
+        isRequired: true,
+        onlyNumber: true,
+        isError: false,
+        helperText: ""
+      },
+      "2": {
+        text: "",
+        isRequired: true,
+        onlyNumber: true,
+        isError: false,
+        helperText: ""
+      },
+      "3": {
+        text: "",
+        isRequired: true,
+        onlyNumber: true,
+        isError: false,
+        helperText: ""
+      },
+      "4": {
+        text: "",
+        isRequired: true,
+        onlyNumber: true,
+        isError: false,
+        helperText: ""
+      },
+      "5": {
+        text: "",
+        isRequired: true,
+        onlyNumber: true,
+        isError: false,
+        helperText: ""
+      },
+      "6": {
+        text: "",
+        isRequired: true,
+        onlyNumber: true,
+        isError: false,
+        helperText: ""
+      },
+      "libero1": {
+        text: "",
+        onlyNumber: true,
+        isError: false,
+        helperText: ""
+      },
+      "libero2": {
+        text: "",
+        onlyNumber: true,
+        isError: false,
+        helperText: ""
+      },
+      comment: {
+        text: "",
+        isError: false,
+        helperText: ""
+      }
     }
   }
 
   changeField(type) {
     return (event) => {
-      let temp = {};
-      temp[type] = event.target.value;
-      this.setState(temp);
+      this.state[type].text = event.target.value;
+      this.setState({ ...this.state });
     }
   }
 
@@ -38,20 +102,57 @@ class SettingPage extends React.Component {
     this.props.setDateAndTime(date, time);
   }
 
+  validation(type, str) {
+    if (type === "required") {
+      if (str.length === 0) return false;
+    }
+    if (type === "number") {
+      if (!/^[0-9]*$/.test(str)) return false;
+    }
+
+    return true;
+  }
+
+  validateText() {
+    let pass = true;
+
+    for (let key of Object.keys(this.state)) {
+      let item = this.state[key];
+      if (item.isRequired && !this.validation("required", item.text)) {
+        item.isError = true;
+        item.helperText = "required"
+        pass = false;
+        continue;
+      }
+
+      if (item.onlyNumber && !this.validation("number", item.text)) {
+        item.isError = true;
+        item.helperText = "only number"
+        pass = false;
+        continue;
+      }
+    }
+
+    this.setState({ ...this.state });
+    return pass;
+  }
+
   setSettingInfo() {
+    if (!this.validateText()) return;
+
     // set competitor and cup
-    this.props.setCup(this.state.cup);
-    this.props.setCompetitor(this.state.competitor);
+    this.props.setCup(this.state.cup.text);
+    this.props.setCompetitor(this.state.competitor.text);
 
     // set athlete and position
     let normals = [];
     for (let key of ["1", "2", "3", "4", "5", "6"]) {
-      normals.push(this.state[key]);
+      normals.push(this.state[key].text);
     }
-    this.props.setAthletes(normals, [this.state.libero1, this.state.libero2])
+    this.props.setAthletes(normals, [this.state.libero1.text, this.state.libero2.text])
 
     // set comment
-    this.props.setComment(this.state.comment);
+    this.props.setComment(this.state.comment.text);
   }
 
   render() {
@@ -73,10 +174,16 @@ class SettingPage extends React.Component {
         <form>
           <Grid container spacing={1}>
             <Grid item xs={6}>
-              <TextField value={this.state.cup} label="盃賽名稱" variant="outlined" onChange={this.changeField("cup")}/>
+              <TextField value={this.state.cup.text} label="盃賽名稱" variant="outlined"
+                required={this.state.cup.isRequired} error={this.state.cup.isError}
+                helperText={this.state.cup.helperText} onChange={this.changeField("cup")}
+              />
             </Grid>
             <Grid item xs={6}>
-              <TextField value={this.state.competitor} required label="對手隊名" variant="outlined" onChange={this.changeField("competitor")}/>
+              <TextField value={this.state.competitor.text} required label="對手隊名" variant="outlined"
+                required={this.state.competitor.isRequired} error={this.state.competitor.isError}
+                helperText={this.state.competitor.helperText} onChange={this.changeField("competitor")}
+              />
             </Grid>
             <Grid item xs={12}>
               <Divider style={{ margin: "10px 0" }}/>
@@ -86,43 +193,70 @@ class SettingPage extends React.Component {
             </Grid>
             <Grid container item xs={12}>
               <Grid item xs={4}>
-                <TextField required value={this.state["4"]} label="4 號位" variant="outlined" onChange={this.changeField("4")}/>
+                <TextField required value={this.state["4"].text} label="4 號位" variant="outlined"
+                  required={this.state["4"].isRequired} error={this.state["4"].isError}
+                  helperText={this.state["4"].helperText} onChange={this.changeField("4")}
+                />
               </Grid>
               <Grid item xs={4}>
-                <TextField required value={this.state["3"]} label="3 號位" variant="outlined" onChange={this.changeField("3")}/>
+                <TextField required value={this.state["3"].text} label="3 號位" variant="outlined"
+                  required={this.state["3"].isRequired} error={this.state["3"].isError}
+                  helperText={this.state["3"].helperText} onChange={this.changeField("3")}
+                />
               </Grid>
               <Grid item xs={4}>
-                <TextField required value={this.state["2"]} label="2 號位" variant="outlined" onChange={this.changeField("2")}/>
+                <TextField required value={this.state["2"].text} label="2 號位" variant="outlined"
+                  required={this.state["2"].isRequired} error={this.state["2"].isError}
+                  helperText={this.state["2"].helperText} onChange={this.changeField("2")}
+                />
               </Grid>
               <Grid item xs={4}>
-                <TextField required value={this.state["5"]} label="5 號位" variant="outlined" onChange={this.changeField("5")}/>
+                <TextField required value={this.state["5"].text} label="5 號位" variant="outlined"
+                  required={this.state["5"].isRequired} error={this.state["5"].isError}
+                  helperText={this.state["5"].helperText} onChange={this.changeField("5")}
+                />
               </Grid>
               <Grid item xs={4}>
-                <TextField required value={this.state["6"]} label="6 號位" variant="outlined" onChange={this.changeField("6")}/>
+                <TextField required value={this.state["6"].text} label="6 號位" variant="outlined"
+                  required={this.state["6"].isRequired} error={this.state["6"].isError}
+                  helperText={this.state["6"].helperText} onChange={this.changeField("6")}
+                />
               </Grid>
               <Grid item xs={4}>
-                <TextField required value={this.state["1"]} label="1 號位" variant="outlined" onChange={this.changeField("1")}/>
+                <TextField required value={this.state["1"].text} label="1 號位" variant="outlined"
+                  required={this.state["1"].isRequired} error={this.state["1"].isError}
+                  helperText={this.state["1"].helperText} onChange={this.changeField("1")}
+                />
               </Grid>
             </Grid>
             <Grid container item xs={12} justify="flex-end" alignItems="center">
               <Grid item xs={4}>
-                <TextField value={this.state["libero1"]} label="自由球員 1" variant="outlined" onChange={this.changeField("libero1")}/>
+                <TextField value={this.state["libero1"].text} label="自由球員 1" variant="outlined"
+                  required={this.state["libero1"].isRequired} error={this.state["libero1"].isError}
+                  helperText={this.state["libero1"].helperText} onChange={this.changeField("libero1")}
+                />
               </Grid>
               <Grid item xs={4}>
-                <TextField value={this.state["libero2"]} label="自由球員 2" variant="outlined" onChange={this.changeField("libero2")}/>
+                <TextField value={this.state["libero2"].text} label="自由球員 2" variant="outlined"
+                  required={this.state["libero2"].isRequired} error={this.state["libero2"].isError}
+                  helperText={this.state["libero2"].helperText} onChange={this.changeField("libero2")}
+                />
               </Grid>
             </Grid>
             <Grid item xs={12}>
               <Divider style={{ margin: "10px 0" }}/>
             </Grid>
             <Grid item xs={12}>
-              <TextField label="備註" value={this.state.comment} multiline rows={4} variant="outlined" className="width-100pa" onChange={this.changeField("comment")}/>
+              <TextField label="備註" value={this.state.comment.text} multiline rows={4} variant="outlined" className="width-100pa"
+                required={this.state.comment.isRequired} error={this.state.comment.isError}
+                helperText={this.state.comment.helperText} onChange={this.changeField("comment")}
+              />
             </Grid>
             <Grid container item xs={12} justify="flex-end" alignItems="center">
               <Grid item xs={4} className="text-right">
-                <Link to="/record">
+                {/* <Link to="/record"> */}
                   <Button variant="contained" color="primary" onClick={() => { this.setSettingInfo(); }}>確認</Button>
-                </Link>
+                {/* </Link> */}
               </Grid>
             </Grid>
           </Grid>
