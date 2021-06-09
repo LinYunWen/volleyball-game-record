@@ -25,6 +25,9 @@ class App extends React.Component {
 
   }
 
+  // componentDidUpdate = () => {
+  //   window.onbeforeunload = () => false
+  // }
 
   render() {
     return (
