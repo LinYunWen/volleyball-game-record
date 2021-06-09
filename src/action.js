@@ -1,5 +1,11 @@
 
 export const commonAction = {
+    setTitle(title) {
+        return {
+            type: "SET_TITLE",
+            payload: title
+        };
+    },
     setDateAndTime(date, time) {
         return {
             type: "SET_DATE_AND_TIME",

@@ -1,5 +1,6 @@
 export const defaultState = {
     common: {
+        title: "排球比賽紀錄",
         date: "",
         time: "",
         athlete: {

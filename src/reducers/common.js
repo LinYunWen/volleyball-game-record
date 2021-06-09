@@ -13,6 +13,11 @@ export function commonReducer(state = defaultState.common, action) {
             newState.time = action.payload.time;
             return newState;
         }
+        case "SET_TITLE": {
+            console.log(action.payload)
+            newState.title = action.payload;
+            return newState;
+        }
         case "SET_ATHLETES": {
             let { normals, liberos } = action.payload;
             newState.athlete.position.normals = normals;

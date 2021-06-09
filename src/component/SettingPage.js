@@ -131,6 +131,9 @@ class SettingPage extends React.Component {
         pass = false;
         continue;
       }
+
+      item.isError = false;
+      item.helperText = "";
     }
 
     this.setState({ ...this.state });
@@ -141,8 +144,11 @@ class SettingPage extends React.Component {
     if (!this.validateText()) return;
 
     // set competitor and cup
-    this.props.setCup(this.state.cup.text);
-    this.props.setCompetitor(this.state.competitor.text);
+    let cup = this.state.cup.text;
+    let competitor = this.state.competitor.text;
+    this.props.setCup(cup);
+    this.props.setCompetitor(competitor);
+    this.props.setTitle(`[${cup}] v.s.${competitor}`);
 
     // set athlete and position
     let normals = [];

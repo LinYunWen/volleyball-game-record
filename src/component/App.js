@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from 'react-redux';
 import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Container from "@material-ui/core/Container";
@@ -12,7 +13,7 @@ import {
 } from "react-router-dom";
 import "../scss/app.scss";
 
-export class App extends React.Component {
+class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -30,7 +31,7 @@ export class App extends React.Component {
       <Router>
         <CssBaseline />
         <AppBar>
-          <span className="bold app-bar-title">排球比賽紀錄</span>
+          <span className="bold app-bar-title">{this.props.common.title}</span>
         </AppBar>
         <Container className="margin-top-60" maxWidth="md">
           <Switch>
@@ -49,3 +50,11 @@ export class App extends React.Component {
     );
   }
 }
+
+const mapStateToProps = store => (
+  {
+    common: store.common
+  }
+)
+
+export default connect(mapStateToProps, {})(App);
