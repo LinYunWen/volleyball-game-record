@@ -7,7 +7,6 @@ import Divider from "@material-ui/core/Divider";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import { Link } from "react-router-dom";
 import "../scss/base.scss";
 
 class SettingPage extends React.Component {
@@ -86,7 +85,9 @@ class SettingPage extends React.Component {
         isError: false,
         helperText: ""
       }
-    }
+    };
+
+    this.submit = this.submit.bind(this);
   }
 
   changeField(type) {
@@ -141,8 +142,6 @@ class SettingPage extends React.Component {
   }
 
   setSettingInfo() {
-    if (!this.validateText()) return;
-
     // set competitor and cup
     let cup = this.state.cup.text;
     let competitor = this.state.competitor.text;
@@ -159,6 +158,14 @@ class SettingPage extends React.Component {
 
     // set comment
     this.props.setComment(this.state.comment.text);
+  }
+
+  submit(event) {
+    if (!this.validateText()) return;
+
+    this.setSettingInfo();
+
+    this.props.history.push("/record");
   }
 
   render() {
@@ -260,9 +267,7 @@ class SettingPage extends React.Component {
             </Grid>
             <Grid container item xs={12} justify="flex-end" alignItems="center">
               <Grid item xs={4} className="text-right">
-                {/* <Link to="/record"> */}
-                  <Button variant="contained" color="primary" onClick={() => { this.setSettingInfo(); }}>確認</Button>
-                {/* </Link> */}
+                <Button variant="contained" color="primary" onClick={this.submit}>確認</Button>
               </Grid>
             </Grid>
           </Grid>

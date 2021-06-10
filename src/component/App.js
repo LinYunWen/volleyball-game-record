@@ -38,15 +38,9 @@ class App extends React.Component {
         </AppBar>
         <Container className="margin-top-60" maxWidth="md">
           <Switch>
-            <Route path="/setting">
-              <SettingPage />
-            </Route>
-            <Route path="/record">
-              <RecordPage />
-            </Route>
-            <Route path="/">
-              <HomePage />
-            </Route>
+            <Route path="/setting" component={SettingPage} />
+            <Route path="/record" component={RecordPage} />
+            <Route path="/" component={HomePage} />
           </Switch>
         </Container>
       </Router>
