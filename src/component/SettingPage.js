@@ -152,9 +152,15 @@ class SettingPage extends React.Component {
     // set athlete and position
     let normals = [];
     for (let key of ["1", "2", "3", "4", "5", "6"]) {
-      normals.push(this.state[key].text);
+      let text = this.state[key].text;
+      (text.length > 0) && normals.push(parseInt(text));
     }
-    this.props.setAthletes(normals, [this.state.libero1.text, this.state.libero2.text])
+    let liberos = [];
+    for (let key of ["libero1", "libero2"]) {
+      let text = this.state[key].text;
+      (text.length > 0) && liberos.push(parseInt(text));
+    }
+    this.props.setAthletes(normals, liberos)
 
     // set comment
     this.props.setComment(this.state.comment.text);

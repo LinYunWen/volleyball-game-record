@@ -25,7 +25,6 @@ class AlertDialog extends React.Component {
   }
 
   render() {
-    console.log(this.props)
     return (
         <Dialog
           open={this.props.common.dialog.isOpen}
