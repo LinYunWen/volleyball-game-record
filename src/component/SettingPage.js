@@ -93,6 +93,7 @@ class SettingPage extends React.Component {
   changeField(type) {
     return (event) => {
       this.state[type].text = event.target.value;
+      this.validateText([type]);
       this.setState({ ...this.state });
     }
   }
@@ -114,10 +115,10 @@ class SettingPage extends React.Component {
     return true;
   }
 
-  validateText() {
+  validateText(keys=Object.keys(this.state)) {
     let pass = true;
 
-    for (let key of Object.keys(this.state)) {
+    for (let key of keys) {
       let item = this.state[key];
       if (item.isRequired && !this.validation("required", item.text)) {
         item.isError = true;
@@ -248,7 +249,7 @@ class SettingPage extends React.Component {
                 />
               </Grid>
             </Grid>
-            <Grid container item xs={12} justify="flex-end" alignItems="center">
+            <Grid container item xs={12} justify="flex-end">
               <Grid item xs={4}>
                 <TextField value={this.state["libero1"].text} label="自由球員 1" variant="outlined"
                   required={this.state["libero1"].isRequired} error={this.state["libero1"].isError}
