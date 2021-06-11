@@ -89,20 +89,20 @@ class RecordPage extends React.Component {
           <Grid item xs={6}>
             <Grid container>
               <Grid item xs={12}>
-                <Typography className="padding-top-bottom-10px">得分</Typography>
+                <Typography className="padding-top-bottom-10px">失分</Typography>
               </Grid>
               <Grid item xs={12}>
-                {this.genScoreAction("get")}
+                {this.genScoreAction("lost")}
               </Grid>
             </Grid>
           </Grid>
           <Grid item xs={6}>
             <Grid container>
               <Grid item xs={12}>
-                <Typography className="padding-top-bottom-10px">失分</Typography>
+                <Typography className="padding-top-bottom-10px">得分</Typography>
               </Grid>
               <Grid item xs={12}>
-                {this.genScoreAction("lost")}
+                {this.genScoreAction("get")}
               </Grid>
             </Grid>
           </Grid>

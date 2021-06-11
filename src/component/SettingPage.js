@@ -147,7 +147,7 @@ class SettingPage extends React.Component {
     let competitor = this.state.competitor.text;
     this.props.setCup(cup);
     this.props.setCompetitor(competitor);
-    this.props.setTitle(`[${cup}] v.s.${competitor}`);
+    this.props.setTitle(`${cup.length > 0 ? `[${cup}]` : ""} v.s.${competitor}`);
 
     // set athlete and position
     let normals = [];
