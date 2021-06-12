@@ -10,7 +10,6 @@ export default class RecordSnackbar extends React.Component {
     this.closeSnackbar = this.closeSnackbar.bind(this);
   }
 
-
   closeSnackbar(event, reason) {
     if (reason === 'clickaway') {
       return;
@@ -30,6 +29,7 @@ export default class RecordSnackbar extends React.Component {
           autoHideDuration={2000}
           open={this.props.isOpen}
           onClose={this.closeSnackbar}
+          TransitionComponent={(props) => { return <Slide {...props} direction="up" />; }}
         >
           <Alert onClose={this.closeSnackbar} variant="filled"
             severity={this.props.isGet ? "success" : "error"}
