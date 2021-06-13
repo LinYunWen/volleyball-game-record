@@ -1,5 +1,81 @@
 
+export const commonAction = {
+    setTitle(title) {
+        return {
+            type: "SET_TITLE",
+            payload: title
+        };
+    },
+    setDateAndTime(date, time) {
+        return {
+            type: "SET_DATE_AND_TIME",
+            payload: {
+                date: date,
+                time: time
+            }
+        };
+    },
+    setAthletes(normals, liberos) {
+        return {
+            type: "SET_ATHLETES",
+            payload: {
+                normals: normals,
+                liberos: liberos
+            }
+        };
+    },
+    setAlertDialog(key, value) {
+        return {
+            type: "SET_ALERT_DIALOG",
+            payload: {
+                key: key,
+                value: value
+            }
+        };
+    }
+}
+
+export const settingAction = {
+    setCup(cup) {
+        return {
+            type: "SET_CUP",
+            payload: cup
+        };
+    },
+    setCompetitor(competitor) {
+        return {
+            type: "SET_COMPETITOR",
+            payload: competitor
+        };
+    },
+    setComment(comment) {
+        return {
+            type: "SET_COMMENT",
+            payload: comment
+        };
+    }
+}
+
 export const recordAction = {
+    modifyScore(side, delta) {
+        return {
+            type: "MODIFY_SCORE",
+            payload: {
+                side: side,
+                delta: delta
+            }
+        };
+    },
+    addRecord(athlete, reason, isGet) {
+        return {
+            type: "ADD_RECORD",
+            payload: {
+                athlete: athlete,
+                reason: reason,
+                isGet: isGet
+            }
+        };
+    },
     changeSelectedAthlete(event, selectedAthlete) {
         return {
             type: "CHANGE_SELECTED_ATHLETE",

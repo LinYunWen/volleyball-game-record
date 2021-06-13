@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from 'react-redux';
-import { recordAction } from '../action';
+import { recordAction, commonAction } from '../action';
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
@@ -10,6 +10,7 @@ import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import { Divider, Grid } from "@material-ui/core";
 import RecordDrawer from "./RecordDrawer";
 import RecordSnackbar from "./RecordSnackbar";
+import AlertDialog from "./AlertDialog";
 import "../scss/record.scss";
 
 class RecordPage extends React.Component {
@@ -44,7 +45,7 @@ class RecordPage extends React.Component {
 
   genToggleButtons() {
     return (
-      this.props.record.athlete.nums.map((num, index) => {
+      this.props.common.athlete.nums.map((num, index) => {
         let s = `${num}`;
        return (
         <ToggleButton key={index} value={s}>
@@ -57,28 +58,30 @@ class RecordPage extends React.Component {
 
   clickActionButton(reason, isGet) {
     return (event) => {
-      this.props.showRecordSnackbar(`${this.props.record.athlete.selected} 球員 (${reason})`, isGet);
+      let athlete = this.props.common.athlete.selected;
+      this.props.modifyScore(isGet ? "us" : "competitor", 1);
+      this.props.addRecord(athlete, reason, isGet);
+      this.props.showRecordSnackbar(`${athlete} 球員 (${reason})`, isGet);
     }
   }
 
   render() {
-    console.log(this.props)
     return (
       <React.Fragment>
         <Grid container alignItems="center" justify="center" alignContent="center">
           <Paper className="score-text-paper">
             <Typography variant="h6" color="textSecondary" className="score-text">敵方</Typography>
-            <Typography variant="h3" className="score-text green">{this.props.record.score.competitor}</Typography>
+            <Typography variant="h3" className="score-text green">{`${this.props.record.score.competitor}`.padStart(2, "0")}</Typography>
           </Paper>
           <Typography variant="h3" className="bold">:</Typography>
           <Paper className="score-text-paper">
             <Typography variant="h6" color="textSecondary" className="score-text">我方</Typography>
-            <Typography variant="h3" className="score-text red">{this.props.record.score.us}</Typography>
+            <Typography variant="h3" className="score-text red">{`${this.props.record.score.us}`.padStart(2, "0")}</Typography>
           </Paper>
         </Grid>
         <Divider style={{ margin: "10px 0px 20px 0" }}/>
         <Grid container item xs={12} alignItems="center" justify="center" alignContent="center">
-          <ToggleButtonGroup value={this.props.record.athlete.selected} onChange={this.props.changeSelectedAthlete} exclusive>
+          <ToggleButtonGroup value={this.props.common.athlete.selected} onChange={this.props.changeSelectedAthlete} exclusive>
             {this.genToggleButtons()}
           </ToggleButtonGroup>
         </Grid>
@@ -86,20 +89,20 @@ class RecordPage extends React.Component {
           <Grid item xs={6}>
             <Grid container>
               <Grid item xs={12}>
-                <Typography className="padding-top-bottom-10px">得分</Typography>
+                <Typography className="padding-top-bottom-10px">失分</Typography>
               </Grid>
               <Grid item xs={12}>
-                {this.genScoreAction("get")}
+                {this.genScoreAction("lost")}
               </Grid>
             </Grid>
           </Grid>
           <Grid item xs={6}>
             <Grid container>
               <Grid item xs={12}>
-                <Typography className="padding-top-bottom-10px">失分</Typography>
+                <Typography className="padding-top-bottom-10px">得分</Typography>
               </Grid>
               <Grid item xs={12}>
-                {this.genScoreAction("lost")}
+                {this.genScoreAction("get")}
               </Grid>
             </Grid>
           </Grid>
@@ -114,11 +117,15 @@ class RecordPage extends React.Component {
             <Grid item xs={4}>
             </Grid>
             <Grid item xs={4}>
-              <Button variant="contained" color="primary">結束紀錄</Button>
+              <Button variant="contained" color="primary"
+                onClick={() => { this.props.setAlertDialog("isOpen", true); }}
+              >
+                結束紀錄
+              </Button>
             </Grid>
           </Grid>
         </Grid>
-
+        <AlertDialog />
         <RecordSnackbar isOpen={this.props.record.snackbar.isOpen}
           message={this.props.record.snackbar.message}
           closeRecordSnackbar={this.props.closeRecordSnackbar}
@@ -130,7 +137,10 @@ class RecordPage extends React.Component {
 }
 
 const mapStateToProps = store => (
-  { record: store.record }
+  {
+    common: store.common,
+    record: store.record
+  }
 )
 
-export default connect(mapStateToProps, recordAction)(RecordPage);
+export default connect(mapStateToProps, { ...recordAction, ...commonAction })(RecordPage);
